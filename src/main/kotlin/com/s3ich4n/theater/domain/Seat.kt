@@ -7,7 +7,7 @@ import jakarta.persistence.Id
 import java.math.BigDecimal
 
 @Entity
-data class Seat(
+class Seat(
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     val id: Long,
     val row: Char,

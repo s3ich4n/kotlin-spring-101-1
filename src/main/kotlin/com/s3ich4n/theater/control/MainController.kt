@@ -1,6 +1,8 @@
 package com.s3ich4n.theater.control
 
+import com.s3ich4n.theater.data.PerformanceRepository
 import com.s3ich4n.theater.data.SeatRepository
+import com.s3ich4n.theater.domain.TheaterData
 import com.s3ich4n.theater.services.BookingService
 import com.s3ich4n.theater.services.TheaterService
 import org.springframework.beans.factory.annotation.Autowired
@@ -23,17 +25,29 @@ class MainController {
     @Autowired
     lateinit var seatRepository: SeatRepository
 
-    @RequestMapping("/")
-    fun homePage() : ModelAndView =
-        ModelAndView("seatBooking", "bean", CheckAvailabilityBackingBean())
+    @Autowired
+    lateinit var performanceRepository: PerformanceRepository
 
+    @RequestMapping("/")
+    fun homePage() : ModelAndView {
+        val theaterData = TheaterData()
+
+        val model = mapOf (
+            "bean" to CheckAvailabilityBackingBean(),
+            "performances" to performanceRepository.findAll(),
+            "seatNums" to theaterData.seatNums,
+            "seatRows" to theaterData.seatRows,
+        )
+
+        return ModelAndView("seatBooking", model)
+    }
     // arrayOf 로 감싸줄 수도 있고 아래방식대로 해도 됨
     @RequestMapping("checkAvailability", method= [RequestMethod.POST])
     fun checkAvailability(bean: CheckAvailabilityBackingBean) : ModelAndView {
         val selectedSeat = theaterService.find(bean.selectedSeatNum, bean.selectedSeatRow)
         val result = bookingService.isSeatFree(selectedSeat)
 
-        bean.result = "Seat $selectedSeat is " + if (result) "available" else "booked"
+        //bean.result = "Seat $selectedSeat is " + if (result) "available" else "booked"
 
         // 빈을 받고 업데이트를 했으니, 그대로 쓴다.
         return ModelAndView("seatBooking", "bean", bean)

@@ -6,6 +6,9 @@ class TheaterData {
     val theaterRows: Int = 15
     val theaterNums: Int = 36
 
+    val seatNums = 1..theaterNums
+    val seatRows = 'A'..'O'
+
     val sizeOfRestrictedView: Int = 2
     val sizeOfBasicView: Int = 1
 
