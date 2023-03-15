@@ -10,8 +10,8 @@
 
     <form action="/checkAvailability" th:object="${bean}" method="POST">
     <p>Check if seat number
-        <select th:field="*{selectedSeatColumn}">
-            <option th:each="n : ${bean.seatCols}" th:value="${n}" th:text="${n}" />
+        <select th:field="*{selectedSeatNum}">
+            <option th:each="n : ${bean.seatNums}" th:value="${n}" th:text="${n}" />
         </select>
          in row
         <select th:field="*{selectedSeatRow}">
