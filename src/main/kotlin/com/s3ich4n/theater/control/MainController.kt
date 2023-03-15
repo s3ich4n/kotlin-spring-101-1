@@ -39,11 +39,11 @@ class MainController {
         return ModelAndView("seatBooking", "bean", bean)
     }
 
-    @RequestMapping("bootstrap")
-    fun createInitialData() : ModelAndView {
-        val seats = theaterService.seats
-        seatRepository.saveAll(seats)
-
-        return homePage()
-    }
+//    @RequestMapping("bootstrap")
+//    fun createInitialData() : ModelAndView {
+//        val seats = theaterService.seats
+//        seatRepository.saveAll(seats)
+//
+//        return homePage()
+//    }
 }
