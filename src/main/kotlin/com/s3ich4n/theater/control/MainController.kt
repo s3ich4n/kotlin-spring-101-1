@@ -1,5 +1,6 @@
 package com.s3ich4n.theater.control
 
+import com.s3ich4n.theater.data.SeatRepository
 import com.s3ich4n.theater.services.BookingService
 import com.s3ich4n.theater.services.TheaterService
 import org.springframework.beans.factory.annotation.Autowired
@@ -19,6 +20,9 @@ class MainController {
     @Autowired
     lateinit var bookingService: BookingService
 
+    @Autowired
+    lateinit var seatRepository: SeatRepository
+
     @RequestMapping("/")
     fun homePage() : ModelAndView =
         ModelAndView("seatBooking", "bean", CheckAvailabilityBackingBean())
@@ -35,4 +39,11 @@ class MainController {
         return ModelAndView("seatBooking", "bean", bean)
     }
 
+    @RequestMapping("bootstrap")
+    fun createInitialData() : ModelAndView {
+        val seats = theaterService.seats
+        seatRepository.saveAll(seats)
+
+        return homePage()
+    }
 }
