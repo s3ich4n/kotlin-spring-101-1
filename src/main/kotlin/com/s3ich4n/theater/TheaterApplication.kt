@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class TheaterApplication
 
 fun main(args: Array<String>) {
-	runApplication<TheaterApplication>(*args)
+    runApplication<TheaterApplication>(*args)
 }
