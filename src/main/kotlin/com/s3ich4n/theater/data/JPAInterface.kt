@@ -9,4 +9,4 @@ interface SeatRepository : JpaRepository<Seat, Long>
 
 interface PerformanceRepository : JpaRepository<Performance, Long>
 
-interface BookingRepository : JpaRepository<Booking, Long>
+interface BookingRepository : JpaRepository<Booking, Long> {}
